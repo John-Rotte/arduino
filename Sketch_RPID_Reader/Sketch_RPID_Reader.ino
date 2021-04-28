@@ -1,3 +1,4 @@
+//https://mschoeffler.com/2018/01/05/arduino-tutorial-how-to-use-the-rdm630-rdm6300-rfid-reader/
 #include <SoftwareSerial.h>
 
 const int BUFFER_SIZE = 14; // RFID DATA FRAME FORMAT: 1byte head (value: 2), 10byte data (2byte version + 8byte tag), 2byte checksum, 1byte tail (value: 3)
@@ -44,6 +45,7 @@ void loop() {
 
     if (call_extract_tag == true) {
       if (buffer_index == BUFFER_SIZE) {
+        //Skapa en lagring av tags i minnet och jämför mot accepterade tags
         unsigned tag = extract_tag();
       } else { // something is wrong... start again looking for preamble (value: 2)
         buffer_index = 0;
